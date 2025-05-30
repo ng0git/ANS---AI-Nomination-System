@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 45 33% 87%;           /* #DFD0B8 – Light Beige */
+  --foreground: 210 22% 16%;          /* #222831 – Charcoal */
+  --muted: 45 33% 87%;                /* #DFD0B8 */
+  --muted-foreground: 30 13% 56%;     /* #948979 – Warm Taupe */
+  --popover: 0 0% 100%;               /* #FFFFFF – Pure White */
+  --popover-foreground: 210 22% 16%;  /* #222831 */
+  --card: 0 0% 100%;                  /* #FFFFFF */
+  --card-foreground: 210 22% 16%;     /* #222831 */
+  --border: 30 13% 56%;               /* #948979 */
+  --input: 30 13% 56%;                /* #948979 */
+  --primary: 210 22% 16%;             /* #222831 */
+  --primary-foreground: 45 33% 87%;   /* #DFD0B8 */
+  --secondary: 30 13% 56%;            /* #948979 */
+  --secondary-foreground: 210 22% 16%;/* #222831 */
+  --accent: 220 9% 23%;               /* #393E46 – Slate Gray */
+  --accent-foreground: 45 33% 87%;    /* #DFD0B8 */
+  --destructive: 0 51% 54%;           /* #B25F5F – Soft Red */
+  --destructive-foreground: 60 9.1% 97.8%; /* #FBFAF4 – Ivory */
+  --ring: 210 22% 16%;                /* #222831 */
+  --radius: 0.75rem;
+
+  /* Custom Chart Palette */
+  --chart-1: 108 32% 45%;             /* #678D58 – Olive Green */
+  --chart-2: 42 33% 61%;              /* #C9A76D – Golden Brown */
+  --chart-3: 30 13% 56%;              /* #948979 – Warm Taupe */
+  --chart-4: 256 23% 49%;             /* #7E5E9C – Dusty Purple */
+  --chart-5: 220 9% 23%;              /* #393E46 – Slate Gray */
+}
+
+.dark {
+  --background: 210 22% 16%;          /* #222831 – Charcoal */
+  --foreground: 45 33% 87%;           /* #DFD0B8 – Light Beige */
+  --muted: 220 9% 23%;                /* #393E46 – Slate Gray */
+  --muted-foreground: 30 13% 56%;     /* #948979 – Warm Taupe */
+  --popover: 210 22% 16%;             /* #222831 */
+  --popover-foreground: 45 33% 87%;   /* #DFD0B8 */
+  --card: 210 22% 16%;                /* #222831 */
+  --card-foreground: 45 33% 87%;      /* #DFD0B8 */
+  --border: 30 13% 56%;               /* #948979 */
+  --input: 30 13% 56%;                /* #948979 */
+  --primary: 45 33% 87%;              /* #DFD0B8 */
+  --primary-foreground: 210 22% 16%;  /* #222831 */
+  --secondary: 30 13% 56%;            /* #948979 */
+  --secondary-foreground: 45 33% 87%; /* #DFD0B8 */
+  --accent: 45 33% 87%;               /* #DFD0B8 */
+  --accent-foreground: 210 22% 16%;   /* #222831 */
+  --destructive: 0 51% 54%;           /* #B25F5F – Soft Red */
+  --destructive-foreground: 45 33% 87%; /* #DFD0B8 */
+  --ring: 45 33% 87%;                 /* #DFD0B8 */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Times New Roman", serif;
+  }
+}
+
+@layer utilities {
+  .serif {
+    font-family: "Times New Roman", serif;
+  }
+}
+
+
+/* Loading spinner with subtle animation */
+.loading-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid hsl(var(--secondary)); /* Spinning highlight */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+/* Spin animation keyframes */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modal backdrop with frosted glass blur */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+}
+
+/* Hover effect for stat cards */
+.stat-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(34, 40, 49, 0.15); /* #222831 – Charcoal Shadow */
+}
