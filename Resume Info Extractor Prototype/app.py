@@ -5,14 +5,11 @@ from spacy.matcher import PhraseMatcher
 import re
 
 nlp = spacy.load("en_core_web_trf")
-# Read skills from a text file
-with open("skills.txt", "r", encoding="utf-8") as f:
-    skills = [line.strip() for line in f if line.strip()]
 
+st.title("Info Extractor From Resume✨")
+
+# Initialize the skill matcher
 skill_matcher = PhraseMatcher(nlp.vocab, attr="LOWER")
-skill_matcher.add("SKILLS", [nlp.make_doc(skill) for skill in skills])
-
-st.title("Infro Extractor From Resume✨")
 
 uploaded_file = st.file_uploader("Choose a file")
 
@@ -23,7 +20,6 @@ if uploaded_file is not None:
         for page in doc:
             text += page.get_text() + "\f"
 
-        
         spacy_doc = nlp(text)
 
         name = "Not Found"
@@ -38,14 +34,34 @@ if uploaded_file is not None:
         email = email_match.group() if email_match else "Not Found"
         st.write("Email Address: " + email)
 
+        # Add a text box for users to input skills (moved below name and email)
+        user_skills_input = st.text_area("Enter skills or keywords to identify (comma-separated):")
+
+        # Add user-provided skills to the matcher
+        if user_skills_input:
+            user_skills = [skill.strip() for skill in user_skills_input.split(",") if skill.strip()]
+            skill_matcher.add("SKILLS", [nlp.make_doc(skill) for skill in user_skills])
+
         skill_matches = skill_matcher(spacy_doc)
         extracted_skills = set()
         for match_id, start, end in skill_matches:
             span = spacy_doc[start:end]
             extracted_skills.add(span.text.title())
 
-        st.write("Skills: ", extracted_skills)
+        # Display skills as a nicely formatted list
+        if extracted_skills:
+            st.write("Skills:")
+            for skill in sorted(extracted_skills):
+                st.write(f"- {skill}")
+        else:
+            st.write("Skills: None found")
 
+        # Calculate and display the score
+        if user_skills_input:
+            total_user_skills = len(user_skills)
+            matched_skills = len(extracted_skills)
+            score = (matched_skills / total_user_skills) * 100 if total_user_skills > 0 else 0
+            st.write(f"Skill Match Score: {score:.2f}%")
 
     except Exception as e:
         st.error(f"Failed to read file! Please make sure the file is a valid document (.PDF or .DOCX).\nError: {e}")
