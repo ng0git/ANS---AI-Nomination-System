@@ -186,11 +186,7 @@ export default function Dashboard({ activeSection = "dashboard" }: DashboardProp
                 <div className="text-2xl font-bold text-accent">{stats?.disqualified || 0}</div>
                 <div className="text-card-foreground text-sm">Disqualified</div>
               </div>
-              
-              <div className="bg-card p-4 rounded-lg shadow-md border-l-4 border-l-[hsl(var(--chart-5))]">
-                <div className="text-2xl font-bold text-accent">{stats?.processing || 0}</div>
-                <div className="text-card-foreground text-sm">Processing</div>
-              </div>
+            
             </div>
 
             {/* Right main area with stacked bar chart */}
